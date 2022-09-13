@@ -35,3 +35,19 @@ export interface CurrentWeather {
     windGust: number,
     windSpeed: number,
 }
+
+// https://developer.apple.com/documentation/weatherkitrestapi/dailyforecast
+export interface DailyForecast {
+
+}
+
+// https://developer.apple.com/documentation/weatherkitrestapi/daypartforecast
+export interface DayPartForecast {
+
+}
+
+// https://developer.apple.com/documentation/weatherkitrestapi/dayweatherconditions
+export interface DayWeatherConditions {
+    conditionCode: string,
+    daytimeForecase: DayPartForecast,
+}
