@@ -32,9 +32,8 @@ export default async function handler(
     });
 
     // Get coordinates from parameters
-    const latitude = req.query.latitude || 41.883718;
-    const longitude = req.query.longitude || -87.632382;
-
+    const latitude = req.query.latitude;
+    const longitude = req.query.longitude;
     // Get current weather from WeatherKit
     const { data } = await axios.get(
       `https://weatherkit.apple.com/api/v1/weather/en/${latitude}/${longitude}?dataSets=currentWeather&countryCode=us`,
@@ -44,7 +43,6 @@ export default async function handler(
         },
       }
     );
-
     res.status(200).json({ message: JSON.stringify(data) });
   } catch (err) {
     res.status(500).send({ message: "failed to fetch data: " + err });

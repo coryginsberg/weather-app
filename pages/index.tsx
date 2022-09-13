@@ -1,36 +1,11 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { json } from "stream/consumers";
 import styles from "../styles/Home.module.css";
-import URI from "../URL.extensions";
+import { useRequestLocation } from "./helper/requestLocation";
+import WeatherSection from "./weatherSection";
 
 const Home: NextPage = () => {
-  const [data, setData] = useState<Object | null>(null);
-  const [isLoading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-
-    const currentUrl = new URI(window.location.href);
-    const url = new URI(currentUrl.origin + "/api/weather");
-    url.addSearchParams(url, {
-      latitiude: "37.33182",
-      longitude: "-122.03118",
-    });
-    fetch(url)
-      .then((res) => res.json())
-      .then((message) => JSON.parse(message.message))
-      .then((data) => {
-        setData(data);
-        console.log(data);
-        setLoading(false);
-      });
-  }, []);
-
-  if (isLoading) return <p>Loading...</p>
-  if (!data) return <p>No profile data</p>
+  const location = useRequestLocation();
 
   return (
     <div className={styles.container}>
@@ -41,21 +16,8 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <div>{JSON.stringify(data.currentWeather)}</div>
+        <WeatherSection location={location}/>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
   );
 };
