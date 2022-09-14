@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken";
 import axios from "axios";
+import validator from "validator";
 
 type Data = {
   message: string;
@@ -34,9 +35,19 @@ export default async function handler(
     // Get coordinates from parameters
     const latitude = req.query.latitude;
     const longitude = req.query.longitude;
-    // Get current weather from WeatherKit
+    const latLongCombined = `${latitude},${longitude}`;
+    if (!validator.isLatLong(latLongCombined)) {
+      res.status(422).json({
+        message:
+          "User coordinates failed validation. Please let me know how you did this.",
+      });
+    }
+    const latLongSplit = latLongCombined.split(",");
+    const dataSets = "currentWeather,forecastDaily";
+    const locale = "en_US";
+    const timezone = "America/Chicago";
     const { data } = await axios.get(
-      `${process.env.WEATHERKIT_BASE_URL}/en/${latitude}/${longitude}?dataSets=currentWeather,forecastDaily&countryCode=us&timezone=America/Chicago`,
+      `${process.env.WEATHERKIT_BASE_URL}/${locale}/${latLongSplit[0]}/${latLongSplit[1]}?dataSets=${dataSets}&timezone=${timezone}`,
       {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
