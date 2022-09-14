@@ -1,7 +1,6 @@
 # Summary
 [Quick summary of everything you have done in this diff]
 
----
 # Test Plan
 
 ### Desktop
