@@ -2,7 +2,7 @@
 #
 # To get started with Next.js see: https://nextjs.org/docs/getting-started
 #
-name: Confirm Next.js builds successfully
+name: Next.js Sucessful Build
 
 on:
   # Runs on pushes targeting the default branch
