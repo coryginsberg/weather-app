@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { useRequestLocation } from "./helper/requestLocation";
+import { useRequestLocation } from "../helper/requestLocation";
 import WeatherSection from "./WeatherSection";
 
 const Home: NextPage = () => {

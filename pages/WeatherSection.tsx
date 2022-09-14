@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ReactElement, useEffect, useState } from "react";
-import { LatLong } from "./helper/requestLocation";
-import { CurrentWeather } from "./helper/weatherDataHelper";
+import { LatLong } from "../helper/requestLocation";
+import { CurrentWeather } from "../helper/weatherDataHelper";
 
 type Props = Readonly<{
   location: LatLong;
