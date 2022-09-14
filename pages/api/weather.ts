@@ -36,7 +36,7 @@ export default async function handler(
     const longitude = req.query.longitude;
     // Get current weather from WeatherKit
     const { data } = await axios.get(
-      `https://weatherkit.apple.com/api/v1/weather/en/${latitude}/${longitude}?dataSets=currentWeather&countryCode=us`,
+      `https://weatherkit.apple.com/api/v1/weather/en/${latitude}/${longitude}?dataSets=currentWeather,forecastDaily&countryCode=us&timezone=America/Chicago`,
       {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
